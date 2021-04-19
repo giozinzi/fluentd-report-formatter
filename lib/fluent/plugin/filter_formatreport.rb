@@ -20,7 +20,27 @@ module Fluent
     class FormatreportFilter < Fluent::Plugin::Filter
       Fluent::Plugin.register_filter("formatreport", self)
 
+      def configure(conf)
+        super
+        # No config needed rn
+      end
+
+      def customfilter(record, time)
+        record.each do |key, val|
+          if key != "ip"
+            tag = "mdm"
+            myRecord = {}
+            myRecord["Namespace"] = "ColomanagerFluentdRedfish"
+            myRecord["Metric"] = "#{key}"
+            myRecord["Dimensions"] = {"Region" => "CentralusEUAP", "IP" => record["ip"]}
+            myRecord["Value"] = "#{val}"
+            router.emit(tag, time, myRecord)
+        end
+      end
+    end
+
       def filter(tag, time, record)
+        customfilter(record, time)
       end
     end
   end
