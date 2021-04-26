@@ -1,8 +1,6 @@
 # fluent-plugin-formatreport
 
-[Fluentd](https://fluentd.org/) filter plugin to do something.
-
-TODO: write description for you plugin.
+[Fluentd](https://fluentd.org/) filter plugin that parses redfish metric reports. See http://ftp.dell.com/manuals/common/dell-emc-idrac9-telemetry-streaming-basics.pdf
 
 ## Installation
 
